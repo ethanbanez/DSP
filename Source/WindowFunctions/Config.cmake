@@ -46,7 +46,7 @@ WindowFunctions/arm_hft248d_f32.c
 )
 
 
-target_sources(CMSISDSP PRIVATE ${SRCF64})
-target_sources(CMSISDSP PRIVATE ${SRCF32})
+target_sources(dspcmsis PRIVATE ${SRCF64})
+target_sources(dspcmsis PRIVATE ${SRCF32})
 
 

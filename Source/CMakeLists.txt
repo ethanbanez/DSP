@@ -1,7 +1,3 @@
-cmake_minimum_required (VERSION 3.14)
-cmake_policy(SET CMP0077 NEW)
-project(CMSISDSP)
-
 # DSP Sources
 SET(DSP ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
@@ -20,13 +16,12 @@ option(HOST "Build for host" OFF)
 option(AUTOVECTORIZE "Prefer autovectorizable code to one using C intrinsics" OFF)
 option(LAXVECTORCONVERSIONS "Lax vector conversions" ON)
 
-###########################
+# ##########################
 #
 # CMSIS DSP
 #
-###########################
-
-add_library(CMSISDSP STATIC)
+# ##########################
+add_library(dspcmsis STATIC)
 
 include(BasicMathFunctions/Config.cmake)
 
@@ -35,11 +30,11 @@ include(ComplexMathFunctions/Config.cmake)
 include(QuaternionMathFunctions/Config.cmake)
 
 include(ControllerFunctions/Config.cmake)
- 
+
 include(FastMathFunctions/Config.cmake)
- 
+
 include(FilteringFunctions/Config.cmake)
- 
+
 include(MatrixFunctions/Config.cmake)
 
 include(StatisticsFunctions/Config.cmake)
@@ -47,9 +42,9 @@ include(StatisticsFunctions/Config.cmake)
 include(SupportFunctions/Config.cmake)
 
 include(TransformFunctions/Config.cmake)
- 
+
 include(CommonTables/Config.cmake)
-  
+
 include(SVMFunctions/Config.cmake)
 
 include(BayesFunctions/Config.cmake)
@@ -60,12 +55,11 @@ include(InterpolationFunctions/Config.cmake)
 
 include(WindowFunctions/Config.cmake)
 
-### Includes
-target_include_directories(CMSISDSP PUBLIC "${DSP}/Include")
-if (DEFINED CMSISCORE)
-target_include_directories(CMSISDSP PUBLIC "${CMSISCORE}/Include")
-endif()
+# ## Includes
+target_include_directories(dspcmsis PUBLIC "${DSP}/Include" PRIVATE $<TARGET_PROPERTY:armcmsis,INTERFACE_INCLUDE_DIRECTORIES>)
 
 include(configDsp.cmake)
 
-configDsp(CMSISDSP)
+configDsp(dspcmsis)
+
+install(TARGETS dspcmsis DESTINATION lib)

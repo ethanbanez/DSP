@@ -64,16 +64,16 @@ set(SRCQ7  MatrixFunctions/arm_mat_mult_q7.c
 )
 
 
-target_sources(CMSISDSP PRIVATE ${SRCF64})
-target_sources(CMSISDSP PRIVATE ${SRCF32})
+target_sources(dspcmsis PRIVATE ${SRCF64})
+target_sources(dspcmsis PRIVATE ${SRCF32})
 
-target_sources(CMSISDSP PRIVATE ${SRCQ31})
-target_sources(CMSISDSP PRIVATE ${SRCQ15})
-target_sources(CMSISDSP PRIVATE ${SRCQ7})
+target_sources(dspcmsis PRIVATE ${SRCQ31})
+target_sources(dspcmsis PRIVATE ${SRCQ15})
+target_sources(dspcmsis PRIVATE ${SRCQ7})
 
 
 if ((NOT ARMAC5) AND (NOT DISABLEFLOAT16))
-target_sources(CMSISDSP PRIVATE MatrixFunctions/arm_mat_add_f16.c
+target_sources(dspcmsis PRIVATE MatrixFunctions/arm_mat_add_f16.c
 MatrixFunctions/arm_mat_cholesky_f16.c
 MatrixFunctions/arm_mat_cmplx_mult_f16.c
 MatrixFunctions/arm_mat_cmplx_trans_f16.c
