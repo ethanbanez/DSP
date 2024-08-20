@@ -56,7 +56,15 @@ include(InterpolationFunctions/Config.cmake)
 include(WindowFunctions/Config.cmake)
 
 # ## Includes
-target_include_directories(dspcmsis PUBLIC "${DSP}/Include" PRIVATE $<TARGET_PROPERTY:armcmsis,INTERFACE_INCLUDE_DIRECTORIES>)
+target_include_directories(dspcmsis 
+PUBLIC 
+${DSP}/Include 
+)
+
+target_link_libraries(dspcmsis
+PRIVATE
+armcmsis)
+
 
 include(configDsp.cmake)
 
